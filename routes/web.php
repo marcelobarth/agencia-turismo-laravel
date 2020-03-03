@@ -13,6 +13,6 @@
 
 Route::get('panel', 'Panel\PanelController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
+
+Route::get('/', 'Site\SiteController@index');
