@@ -18,12 +18,12 @@ class CreateAirportsTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities');
             $table->string('name', 100);
-            $table->string('latitude', 15);
-            $table->string('longitude', 15);
-            $table->string('address', 100);
-            $table->integer('number');
-            $table->string('zip_code', 11)->nullable()->unique();
-            $table->string('complement', 190);
+            $table->string('latitude', 15)->nullable();
+            $table->string('longitude', 15)->nullable();
+            $table->string('address', 100)->nullable();
+            $table->integer('number')->nullable();
+            $table->string('zip_code', 11)->unique()->nullable();
+            $table->string('complement', 190)->nullable();
             $table->timestamps();
         });
     }
