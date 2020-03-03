@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFligthsTable extends Migration
+class CreateFlightsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateFligthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fligths', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('plane_id');
-            $table->unsignedBigInteger('airport_origin_id');
-            $table->unsignedBigInteger('airport_destination_id');
+        Schema::create('flights', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('plane_id')->unsigned();
+            $table->integer('airport_origin_id')->unsigned();
+            $table->integer('airport_destination_id')->unsigned();
             $table->date('date');
             $table->time('time_duration');
             $table->time('hour_output');
@@ -31,9 +31,19 @@ class CreateFligthsTable extends Migration
             $table->text('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('plane_id')->references('id')->on('planes');
-            $table->foreign('airport_origin_id')->references('id')->on('airports');
-            $table->foreign('airport_destination_id')->references('id')->on('airports');
+
+            $table->foreign('plane_id')
+                    ->references('id')
+                    ->on('planes')
+                    ->onDelete('cascade');
+            $table->foreign('airport_origin_id')
+                    ->references('id')
+                    ->on('airports')
+                    ->onDelete('cascade');
+            $table->foreign('airport_destination_id')
+                    ->references('id')
+                    ->on('airports')
+                    ->onDelete('cascade');
         });
     }
 
@@ -44,6 +54,6 @@ class CreateFligthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fligths');
+        Schema::dropIfExists('flights');
     }
 }

@@ -14,9 +14,12 @@ class CreateAirportsTable extends Migration
     public function up()
     {
         Schema::create('airports', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->increments('id');
+            $table->integer('city_id')->unsigned();
+            $table->foreign('city_id')
+                        ->references('id')
+                        ->on('cities')
+                        ->onDelete('cascade');
             $table->string('name', 100);
             $table->string('latitude', 15)->nullable();
             $table->string('longitude', 15)->nullable();
