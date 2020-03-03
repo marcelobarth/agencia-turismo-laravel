@@ -1,0 +1,189 @@
+1) Vá até o site do Laradock:
+https://laradock.io/
+
+2) Clone o Laradock dentro do diretório do seu projeto:
+git clone https://github.com/Laradock/laradock.git
+
+3) Crie um arquivo .env a partir do env-example e faça as modificações necessárias de BD e etc...
+
+4) Dentro do diretório Laradock execute o comando com as imagens necessárias, 
+use http://localhost:8080 Servidor: mysql
+Usuário: root
+Senha: rootpara entrar no Mysql
+
+docker-compose up -d nginx mysql phpmyadmin
+
+5) Dentro de nginx/site crie um arquivo .conf. Ex: app1.conf, com as configurações:
+
+server {
+    listen 80;(porta que está riodaado a aplicação)
+    listen [::]:80;(porta que será escutada)
+
+    server_name app1.dev;(nome da aplicação)
+    root /var/www/app1; (localização da aplicação)
+    index index.php index.html index.htm;(tipos de arquivos que vai ler)
+
+    location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+    }(configurações de leitura do php)
+
+    location ~ \.php$ {
+        try_files $uri /index.php =404;
+        fastcgi_pass php-upstream;
+        fastcgi_index index.php;
+        fastcgi_buffers 16 16k;
+        fastcgi_buffer_size 32k;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #fixes timeouts
+        fastcgi_read_timeout 600;
+        include fastcgi_params;
+    }
+}
+
+6) No arquivo de hosts, adicione o virtual host local da sua aplicação:
+127.0.0.1 app1.dev
+
+7) Após adicionar os virtual host, dentro do diretório Laradock, restarte os containers:
+docker-compose restart
+
+8) Clone os layouts necessários para o diretório do projeto
+https://github.com/especializati/layout-dashboard-free
+https://github.com/especializati/layout-agencia-turismo
+
+9) Crie os arquivos .conf na diretório nginx/sites dos dois layouts
+layoutdashboard.conf
+layoutturismos.conf
+
+10) Crie os virtuais hosts de cada um no arquivo etc/hosts
+
+11) Crie o BD (no MySQL)
+-show databases; (Mostra os BDs)
+
+-create database agencia_turismo CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; (Cria um BD)
+
+-use agencia_turismo;(Seleciona um BD)
+
+-show tables;(Mostra as Tabelas)
+
+12) Dentro do diretório Laradock, acessar o container de workspace e executar o comando:
+docker-compose exec workspace bash 
+
+13) Instalar o Laravel dentro do wokspace, execute o comando:
+composer create-project --prefer-dist laravel/laravel laravel55 "5.5.*"
+
+14) Depois de instalado o Laravel, acesse o diretório dele e abra o arquivo .env no editor. 
+- Crie o virtual host do projeto em APP_URL
+
+15) Abra config/app.php
+- Altere o 'timezone' para  'America/Sao_Paulo'
+
+16) Crie o arquivo .conf em laradock/nginx/sites
+
+server {
+    listen 80;
+    listen [::]:80;
+
+    server_name agencia-turismo.test;
+    root /var/www/laravel55/public; 
+    index index.php index.html index.htm;
+
+    location / {
+         try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        try_files $uri /index.php =404;
+        fastcgi_pass php-upstream;
+        fastcgi_index index.php;
+        fastcgi_buffers 16 16k;
+        fastcgi_buffer_size 32k;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #fixes timeouts
+        fastcgi_read_timeout 600;
+        include fastcgi_params;
+    }
+}
+
+17) Adicione o server_name no arquivo etc/hosts
+
+18) Agora acesse o diretório laradock e restarte os containers
+docker-compose restart
+
+19) Com os containers em pé, dentro do diretório laradock\laravel55 execute o comando:
+docker-compose exec workspace bash
+
+20) Entre no diretório onde está o projeto (laravel55) e crie as migrations e as respectivas models com o comando:
+php artisan make:model Models\\Brand -m
+
+21) Fazer as configurações do BD no .env:
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=agencia_turismo
+DB_USERNAME=root
+DB_PASSWORD=root
+
+22) Depois configurar as configurações de chasrset e collation em app/Providers\AppServiceProvider.php conforme config/database do BD que vc vai usar. Geralmente o padrão é:
+'charset' => 'utf8mb4',
+'collation' => 'utf8mb4_unicode_ci',
+
+Insira: 
+
+use Illuminate\Support\Facades\Schema;
+public function boot()
+{
+    Schema::defaultStringLength(191);
+}
+
+23) Depois de tudo configurado, rode o comando:
+php artisan migrate
+
+O problema é porque o laradock/ está configurado para trabalhar com a versão 8 do MYSQL, e essa versão tem alguns problemas de compatibilidade com o PHP.
+
+Siga estes passos:
+// Destruir os containers:
+docker-compose down
+
+// Listar as imagens
+docker images
+
+// Remova todas as imagens do MYSQL (mais importante!)
+docker rmi IDIMAGE_AQUI
+
+// Delela o diretório:
+~/.laradock/data
+
+No arquivo .env do laradock/ deixa a versão 5.7:
+MYSQL_VERSION=5.7
+
+// Recria o container com a imagem nova:
+docker-compose build mysql
+
+// Por último, suba novamente os containers:
+docker-compose up -d nginx mysql phpmyadmin
+
+// Verifica se está tudo OK:
+docker ps
+
+24)Criar migrations e models dentro de um diretório personalizado(Models) dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan make:make:model Models\\NomedaModel -m
+
+25)Criar controllers dentro de um diretório personalizado(Models) dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan make:controller NomedoDiretório\\Nomeda\Controller
+
+26)Cria os itens de autenticação automaticamente, dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan make:auth
+
+27)Para testar recuperar senha, criar um email fake, necessita cadstrar uma conta no https://mailtrap.io/. Depois de criar alterar as inforamções no arquivo .env com os dados do mailtrap:
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=98b5821d2330a7
+MAIL_PASSWORD=b57f591527dae2
+MAIL_ENCRYPTION=tls
+
+Crie as constantes no arquivo .env com dados para especificar quem está enviando o email:
+MAIL_FROM_ADDRESS=marcelinhobarth@gmail.com
+MAIL_FROM_NAME='Marcelo Barth'
+
