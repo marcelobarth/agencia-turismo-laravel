@@ -187,3 +187,21 @@ Crie as constantes no arquivo .env com dados para especificar quem está enviand
 MAIL_FROM_ADDRESS=marcelinhobarth@gmail.com
 MAIL_FROM_NAME='Marcelo Barth'
 
+28)Criar uma controller com todos os métodos REST, dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan make:controller Panel\\BrandController --resource
+
+29)Em seguida é só adicionar a rota resource:
+Routes::resource('panel/brands', 'Panel\BrandController');
+
+30)Use prefixo para várias rotas com o mesmo namespace:
+Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
+    Route::resource('brands', 'BrandController');
+    Route::get('/', 'PanelController@index')->name('panel');
+});
+
+31)Sempre adicionar o token de validação no form:
+ <form class="form form-search form-ds" action="{{route('brands.store')}}" method="post">
+      {!! csrf_field() !!}
+
+32)Crie na Model um fillable com os campos que podem ser preenchidos, ou guarded, com os campos q não podem ser preeenchidos.
+protected $fillable = ['name'];
