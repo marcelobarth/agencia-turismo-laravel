@@ -22,6 +22,20 @@
         </form>
     </div>
 
+    <div class="messages">
+        @if(session('success'))
+        <div class='alert alert-success'>
+            {{session('success')}}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class='alert alert-error'>
+            {{session('error')}}
+        </div>
+        @endif
+    </div>
+
     <div class="class-btn-insert">
         <a href="{{route('brands.create')}}" class="btn-insert">
             <span class="glyphicon glyphicon-plus"></span>
@@ -43,7 +57,7 @@
             <td>Email do User</td>
             <td>Outra Info</td>
             <td>
-                <a href="" class="edit">Edit</a>
+                <a href="{{route('brands.edit', $brand->id)}}" class="edit">Edit</a>
                 <a href="" class="delete">Delete</a>
             </td>
         </tr>
