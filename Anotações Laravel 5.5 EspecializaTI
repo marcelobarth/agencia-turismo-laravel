@@ -205,3 +205,41 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
 32)Crie na Model um fillable com os campos que podem ser preenchidos, ou guarded, com os campos q não podem ser preeenchidos.
 protected $fillable = ['name'];
+
+33)Na controller posso fazer um redirecionamento com uma mensagem de confirmação ou erro após uma ação:
+if ($this->brand->create($dataForm))
+            return redirect()
+                ->route('brands.index')
+                ->with('success', 'Cadastro realizado com sucesso!');
+        else
+            return redirect()->back()->with('error', 'Falha ao cadastrar!');
+
+
+34)Para criar uma Request Validator, dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan make:request BrandStoreUpdateFormRequest
+
+Em authorize, mude para return true, e em rules adicone as validações:
+
+public function rules()
+    {
+        return [
+            'name' => 'required|min:3|max:100|unique:brands',
+        ];
+    }
+
+Na Controller de um use App\Http\Requests\BrandStoreUpdateFormRequest, e faça a DI no método store.
+
+Adicone uma div na page que quer exibir os errors:
+@if(isset($errors) && $errors->any())
+    <div class="alert alert-warning">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
+
+
