@@ -253,5 +253,24 @@ public function rules()
         ];
     }
 
+36)Instalar o pacote Laravel Collective para construir e lidar com formulários. Dentro do wokspace de laradock\laravel55 execute o comando:
 
+composer require "laravelcollective/html":"^5.4.0"
+
+Apartir do Laravel 5.5 não é necessário registrar os providers e aliases por conta do recurso "package auto-discovery".
+
+Podemos agora substituir isso:
+<form class="form form-search form-ds" action="{{route('brands.update', $brand->id)}}" method="POST">
+Por isso:
+{!! Form::model($brand, ['route' => ['brands.update', $brand->id], 'class' => 'form form-search form-ds', 'method' => 'PUT']) !!}
+
+E isso:
+<form class="form form-search form-ds" action="{{route('brands.store')}}" method="POST">
+Por isso:
+{!! Form::open(['route' => 'brands.store', 'class' => 'form form-search form-ds']) !!}
+
+E isso:
+<input type="text" value= "{{old('name')}}" name="name" placeholder="Nome:" class="form-control">
+Por isso:
+{!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome']) !!}
 
