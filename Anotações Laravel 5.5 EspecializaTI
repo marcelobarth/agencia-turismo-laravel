@@ -218,7 +218,7 @@ if ($this->brand->create($dataForm))
 34)Para criar uma Request Validator, dentro do wokspace de laradock\laravel55 execute o comando:
 php artisan make:request BrandStoreUpdateFormRequest
 
-Em authorize, mude para return true, e em rules adicone as validações:
+Em authorize, mude para return true, e em rules adicione as validações:
 
 public function rules()
     {
@@ -240,6 +240,18 @@ Adicone uma div na page que quer exibir os errors:
     </div>
     @endif
 
+35)Para recuperar um parâmetro pela URL, use segment:
+
+use Request;
+
+public function rules()
+    {
+        $id = Request::segment(3);
+
+        return [
+            'name' => "required|min:3|max:100|unique:brands,name,{$id},id",
+        ];
+    }
 
 
 
