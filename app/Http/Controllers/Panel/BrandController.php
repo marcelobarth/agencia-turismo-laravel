@@ -10,7 +10,7 @@ use App\Http\Requests\BrandStoreUpdateFormRequest;
 class BrandController extends Controller
 {
     private $brand;
-    protected $totalPage = 4;
+    protected $totalPage = 20;
 
     public function __construct(Brand $brand)
     {
@@ -69,7 +69,14 @@ class BrandController extends Controller
      */
     public function show($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back();
+
+        $title = "Detalhes da  Marca: {$brand->name}";
+
+        return view('panel.brands.show', compact('title', 'brand'));
     }
 
     /**
@@ -122,15 +129,27 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if (!$brand)
+            return redirect()->back();
+
+        if ($brand->delete())
+            return redirect()
+                ->route('brands.index')
+                ->with('success', 'Deletado com sucesso!');
+        else
+            return redirect()->back()->with('error', 'Falha ao deletar!');
     }
 
     public function search(Request $request)
     {
+        $dataForm = $request->except('_token');
+
         $brands = $this->brand->search($request->key_search, $this->totalPage);
 
         $title = "Brands, filtros para: {$request->key_search}";
 
-        return view('panel.brands.index', compact('title', 'brands'));
+        return view('panel.brands.index', compact('title', 'brands', 'dataForm'));
     }
 }

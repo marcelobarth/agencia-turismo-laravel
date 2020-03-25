@@ -22,20 +22,19 @@
         <button class="btn btn-search">Pesquisar</button>
         <!-- </form> -->
         {!! Form::close() !!}
+
+        @if(isset($dataForm['key_search']))
+        <div class="alert alert-info">
+            <p>
+                <a href="{{route('brands.index')}}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                Resultados para: <strong>{{$dataForm['key_search']}}</strong>
+            </p>
+        </div>
+        @endif
     </div>
 
     <div class="messages">
-        @if(session('success'))
-        <div class='alert alert-success'>
-            {{session('success')}}
-        </div>
-        @endif
-
-        @if(session('error'))
-        <div class='alert alert-error'>
-            {{session('error')}}
-        </div>
-        @endif
+        @include('panel.includes.alerts')
     </div>
 
     <div class="class-btn-insert">
@@ -60,7 +59,7 @@
             <td>Outra Info</td>
             <td>
                 <a href="{{route('brands.edit', $brand->id)}}" class="edit">Edit</a>
-                <a href="" class="delete">Delete</a>
+                <a href="{{route('brands.show', $brand->id)}}" class="delete">View</a>
             </td>
         </tr>
         @empty
@@ -70,7 +69,11 @@
         @endforelse
     </table>
 
+    @if(isset($dataForm))
+    {!! $brands->appends($dataForm)->links() !!}
+    @else
     {!! $brands->links() !!}
+    @endif
 
 </div>
 <!--Content Dinâmico-->

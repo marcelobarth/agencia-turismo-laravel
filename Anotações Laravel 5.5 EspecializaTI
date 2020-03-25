@@ -276,3 +276,12 @@ Por isso:
 
 37) Para criar paginação, use o método paginate() na controller, ou crie um método na model para servir essas função, em seguida use o método links(), para exibir a paginação em uma view.
 
+38) Para preservar os dados do filtro e passá-los para a próxima página de paginação use o appends?
+
+@if(isset($dataForm))
+    {!! $brands->appends($dataForm)->links() !!}
+@else
+    {!! $brands->links() !!}
+@endif
+
+
