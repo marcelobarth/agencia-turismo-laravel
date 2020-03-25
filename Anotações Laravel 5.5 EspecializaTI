@@ -274,3 +274,5 @@ E isso:
 Por isso:
 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Nome']) !!}
 
+37) Para criar paginação, use o método paginate() na controller, ou crie um método na model para servir essas função, em seguida use o método links(), para exibir a paginação em uma view.
+
