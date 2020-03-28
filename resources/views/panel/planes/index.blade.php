@@ -17,7 +17,7 @@
         <!-- <form class="form form-inline">
             <input type="text" name="nome" placeholder="Nome:" class="form-control">
             <input type="text" name="email" placeholder="E-mail:" class="form-control"> -->
-        {!! Form::open(['route' => 'brands.search', 'class' => 'form form-inline']) !!}
+        {!! Form::open(['route' => 'planes.search', 'class' => 'form form-inline']) !!}
         {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite uma palavra chave']) !!}
         <button class="btn btn-search">Pesquisar</button>
         <!-- </form> -->
@@ -71,6 +71,7 @@
         @endforelse
     </table>
 
+    <!--Paginação-->
     @if(isset($dataForm))
     {!! $planes->appends($dataForm)->links() !!}
     @else

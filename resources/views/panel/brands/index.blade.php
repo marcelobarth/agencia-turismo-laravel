@@ -69,6 +69,7 @@
         @endforelse
     </table>
 
+    <!--Paginação-->
     @if(isset($dataForm))
     {!! $brands->appends($dataForm)->links() !!}
     @else
