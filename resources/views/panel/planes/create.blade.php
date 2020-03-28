@@ -4,7 +4,7 @@
 
 <div class="bred">
     <a href="{{route('panel')}}" class="bred">Home > </a>
-    <a href="{{route('brands.index')}}" class="bred">Aviões > </a>
+    <a href="{{route('planes.index')}}" class="bred">Aviões > </a>
     <a href="" class="bred">Cadastrar</a>
 </div>
 
@@ -16,7 +16,7 @@
 
     @include('panel.includes.errors')
 
-    {!! Form::open(['route' => 'brands.store', 'class' => 'form form-search form-ds']) !!}
+    {!! Form::open(['route' => 'planes.store', 'class' => 'form form-search form-ds']) !!}
 
     @include('panel.planes.form')
 
