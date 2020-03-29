@@ -49,7 +49,6 @@
             <td>{{$state->name}}</td>
             <td>{{$state->initials}}</td>
             <td>
-                <!-- <a href="{{route('states.edit', $state->id)}}" class="edit">Edit</a> -->
                 #ações
             </td>
         </tr>
