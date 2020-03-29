@@ -8,17 +8,19 @@ use App\Models\State;
 
 class CityController extends Controller
 {
+    private $totalPage = 20;
+
     public function index($initials)
     {
-        $state = State::where('initials', $initials)->with('cities')->get()->first();
+        $state = State::where('initials', $initials)->get()->first();
 
         if (!$state) {
             return redirect()->back();
         }
 
-        $cities = $state->cities;
+        $cities = $state->cities()->paginate($this->totalPage);
 
-        $title = "Cidades do estado {$state->name}";
+        $title = "Cidades do Estado {$state->name}";
 
         return view('panel.cities.index', compact('title', 'state', 'cities'));
     }

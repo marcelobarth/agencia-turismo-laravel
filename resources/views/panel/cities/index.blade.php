@@ -10,7 +10,7 @@
 </div>
 
 <div class="title-pg">
-    <h1 class="title-pg">Cidades do Estado<strong>{{$state->name}}</strong></h1>
+    <h1 class="title-pg">({{$cities->count()}} de {{$cities->total()}}) Cidades do Estado: <strong>{{$state->name}}</strong></h1>
 </div>
 
 <div class="content-din bg-white">
@@ -58,6 +58,9 @@
         </tr>
         @endforelse
     </table>
+
+    <!--Paginação-->
+    {!! $cities->links() !!}
 
 </div>
 <!--Content Dinâmico-->
