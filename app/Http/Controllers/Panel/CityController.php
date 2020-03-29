@@ -10,14 +10,16 @@ class CityController extends Controller
 {
     public function index($initials)
     {
-        $state = State::where('initials', $initials)->get()->first();
+        $state = State::where('initials', $initials)->with('cities')->get()->first();
 
         if (!$state) {
             return redirect()->back();
         }
 
+        $cities = $state->cities;
+
         $title = "Cidades do estado {$state->name}";
 
-        return view('panel.cities.index', compact('title'));
+        return view('panel.cities.index', compact('title', 'state', 'cities'));
     }
 }

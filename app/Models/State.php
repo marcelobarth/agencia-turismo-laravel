@@ -12,4 +12,9 @@ class State extends Model
             ->orWhere('initials', $keySearch)
             ->get();
     }
+
+    public function cities()
+    {
+        return $this->hasMany(City::class);
+    }
 }

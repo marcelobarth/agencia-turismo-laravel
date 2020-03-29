@@ -4,7 +4,7 @@
 
 <div class="bred">
     <a href="{{route('panel')}}" class="bred">Home > </a>
-    <a href="{{route('states.index')}}" class="bred">Estados > </a>
+    <a href="{{route('state.index')}}" class="bred">Estados > </a>
     <a href="{{route('state.cities', $state->id)}}" class="bred">{{$state->name}} </a>
     <a href="" class="bred">Cidades > </a>
 </div>
@@ -19,7 +19,7 @@
         <!-- <form class="form form-inline">
             <input type="text" name="nome" placeholder="Nome:" class="form-control">
             <input type="text" name="email" placeholder="E-mail:" class="form-control"> -->
-        {!! Form::open(['route' => 'states.cities.search', 'class' => 'form form-inline']) !!}
+        {!! Form::open(['route' => ['state.cities.search', $state->initials], 'class' => 'form form-inline']) !!}
         {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite uma palavra chave']) !!}
         <button class="btn btn-search">Pesquisar</button>
         <!-- </form> -->
