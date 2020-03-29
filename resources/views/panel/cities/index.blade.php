@@ -28,7 +28,7 @@
         @if(isset($dataForm['key_search']))
         <div class="alert alert-info">
             <p>
-                <a href="{{route('states.index')}}"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                 Resultados para: <strong>{{$dataForm['key_search']}}</strong>
             </p>
         </div>
@@ -60,7 +60,11 @@
     </table>
 
     <!--Paginação-->
+    @if(isset($dataForm))
+    {!! $cities->appends($dataForm)->links() !!}
+    @else
     {!! $cities->links() !!}
+    @endif
 
 </div>
 <!--Content Dinâmico-->
