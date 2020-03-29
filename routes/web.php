@@ -14,6 +14,7 @@
 Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
     Route::any('brands/search', 'BrandController@search')->name('brands.search');
+    Route::any('brands/{id}/planes', 'BrandController@planes')->name('brands.planes');
     Route::resource('brands', 'BrandController');
 
     Route::any('planes/search', 'PlaneController@search')->name('planes.search');

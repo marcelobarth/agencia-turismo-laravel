@@ -47,19 +47,18 @@
     <table class="table table-striped">
         <tr>
             <th>Nome</th>
-            <th>E-mail</th>
-            <th>Last</th>
-            <th width="150">Ações</th>
+            <th width="200">Ações</th>
         </tr>
 
         @forelse($brands as $brand)
         <tr>
             <td>{{$brand->name}}</td>
-            <td>Email do User</td>
-            <td>Outra Info</td>
             <td>
                 <a href="{{route('brands.edit', $brand->id)}}" class="edit">Edit</a>
                 <a href="{{route('brands.show', $brand->id)}}" class="delete">View</a>
+                <a href="{{route('brands.planes', $brand->id)}}" class="delete">
+                    <i class="fa fa-plane" aria-hidden="true"></i>
+                </a>
             </td>
         </tr>
         @empty
