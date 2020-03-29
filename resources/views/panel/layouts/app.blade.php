@@ -49,6 +49,12 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('state.index')}}">
+                        <i class="fa fa-globe" aria-hidden="true"></i>
+                        Estados
+                    </a>
+                </li>
             </ul>
         </div>
 
