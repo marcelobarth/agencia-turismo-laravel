@@ -67,66 +67,66 @@ class FlightController extends Controller
                 ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
     }
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     $flight = $this->flight->with(['origin', 'destination'])->find($id);
-    //     if (!$flight)
-    //         return redirect()->back();
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $flight = $this->flight->with(['origin', 'destination'])->find($id);
+        if (!$flight)
+            return redirect()->back();
 
-    //     $title = "Detalhes do voo {$flight->id}";
+        $title = "Detalhes do voo {$flight->id}";
 
-    //     return view('panel.flights.show', compact('flight', 'title'));
-    // }
+        return view('panel.flights.show', compact('flight', 'title'));
+    }
 
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     $flight = $this->flight->find($id);
-    //     if (!$flight)
-    //         return redirect()->back();
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $flight = $this->flight->find($id);
+        if (!$flight)
+            return redirect()->back();
 
-    //     $title = "Editar Voo {$flight->id}";
+        $title = "Editar Voo {$flight->id}";
 
-    //     $planes = Plane::pluck('id', 'id');
-    //     $airports = Airport::pluck('name', 'id');
+        $planes = Plane::pluck('id', 'id');
+        $airports = Airport::pluck('name', 'id');
 
-    //     return view('panel.flights.edit', compact('title', 'flight', 'planes', 'airports'));
-    // }
+        return view('panel.flights.edit', compact('title', 'flight', 'planes', 'airports'));
+    }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     $flight = $this->flight->find($id);
-    //     if (!$flight)
-    //         return redirect()->back();
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $flight = $this->flight->find($id);
+        if (!$flight)
+            return redirect()->back();
 
-    //     if ($flight->updateFlight($request))
-    //         return redirect()
-    //             ->route('flights.index')
-    //             ->with('success', 'Sucesso ao atualizar');
-    //     else
-    //         return redirect()
-    //             ->back()
-    //             ->with('error', 'Falha ao atualizar')
-    //             ->withInput();
-    // }
+        if ($flight->updateFlight($request))
+            return redirect()
+                ->route('flights.index')
+                ->with('success', 'Sucesso ao atualizar');
+        else
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao atualizar')
+                ->withInput();
+    }
 
     // /**
     //  * Remove the specified resource from storage.
