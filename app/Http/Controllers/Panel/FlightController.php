@@ -27,8 +27,8 @@ class FlightController extends Controller
     {
         $title = 'Voos disponíveis';
 
-        // $flights = $this->flight->getItems();
-        $flights = $this->flight->paginate($this->totalPage);
+        // $flights = $this->flight->paginate($this->totalPage);
+        $flights = $this->flight->getItems(); //Esse método foi criado na model, substituindo o anterior
 
         return view('panel.flights.index', compact('title', 'flights'));
     }
