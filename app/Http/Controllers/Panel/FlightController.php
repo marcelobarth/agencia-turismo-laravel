@@ -48,24 +48,24 @@ class FlightController extends Controller
         return view('panel.flights.create', compact('title', 'planes', 'airports'));
     }
 
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-    //     if ($this->flight->newFlight($request))
-    //         return redirect()
-    //             ->route('flights.index')
-    //             ->with('success', 'Sucesso ao cadastrar');
-    //     else
-    //         return redirect()
-    //             ->back()
-    //             ->with('error', 'Falha ao cadastrar')
-    //             ->withInput();
-    // }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        if ($this->flight->newFlight($request))
+            return redirect()
+                ->route('flights.index')
+                ->with('success', 'Sucesso ao cadastrar');
+        else
+            return redirect()
+                ->back()
+                ->with('error', 'Falha ao cadastrar')
+                ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
+    }
 
     // /**
     //  * Display the specified resource.
