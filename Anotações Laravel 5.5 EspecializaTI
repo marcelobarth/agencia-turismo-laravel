@@ -284,4 +284,30 @@ Por isso:
     {!! $brands->links() !!}
 @endif
 
+39)Para fazer tratamentos pode-se utilizar Mutators do Laravel. Para tratar data retornada, por ex, na Model crio um método, ou como um helper. Mais exemplos em https://blog.especializati.com.br/mutators-no-laravel/
+
+public function getDateAttribute($value)
+    {
+        return Carbon::parse($value)->format('d/m/Y');
+    }
+
+40)Use if para retornar mensagens:
+
+if ($brand->delete())
+    return redirect()
+        ->route('brands.index')
+        ->with('success', 'Deletado com sucesso!');
+else
+            return redirect()->back()->with('error', 'Falha ao deletar!');
+
+41)Use pluck para retornar somente os atributos que deseja:
+
+$airports = Airport::pluck('name', 'id');
+
+42) Use withInput() que permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
+
+return redirect()
+    ->back()
+    ->with('error', 'Falha ao cadastrar')
+    ->withInput();
 
