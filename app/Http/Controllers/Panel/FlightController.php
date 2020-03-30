@@ -128,18 +128,18 @@ class FlightController extends Controller
                 ->withInput();
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     $this->flight->find($id)->delete();
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $this->flight->find($id)->delete();
 
-    //     return redirect()
-    //         ->route('flights.index')
-    //         ->with('success', 'Sucesso ao deletar');
-    // }
+        return redirect()
+            ->route('flights.index')
+            ->with('success', 'Sucesso ao deletar');
+    }
 }
