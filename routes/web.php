@@ -26,6 +26,8 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::any('states/{initials}/cities/search', 'CityController@search')->name('state.cities.search');
     Route::get('states/{initials}/cities', 'CityController@index')->name('state.cities');
 
+    Route::resource('flights', 'FlightController');
+
     Route::get('/', 'PanelController@index')->name('panel');
 });
 

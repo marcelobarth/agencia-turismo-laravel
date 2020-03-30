@@ -12,7 +12,7 @@ class PlaneController extends Controller
 {
 
     private $plane;
-    protected $totalPage = 20;
+    private $totalPage = 20;
 
     public function __construct(Plane $plane)
     {
