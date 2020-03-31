@@ -56,6 +56,15 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
+        //Verifica se existe o arquivo e se ele é um a arquivo válido, então se true, salva
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $extension = $request->image->extension(); //Pegando a extensão do arquivo
+            $nameFile = uniqid(date('HisYmd')); //Definindo a hora como nome do arquivo
+            $newNameFile = "{$nameFile}.{$extension}"; //Juntando para criar o novo nome
+
+            $request->image->storeAs('flights', $newNameFile); //Cria a pasta flights, se não existir
+        }
+
         if ($this->flight->newFlight($request))
             return redirect()
                 ->route('flights.index')

@@ -311,3 +311,19 @@ return redirect()
     ->with('error', 'Falha ao cadastrar')
     ->withInput();
 
+43)Para Upload de imagens:
+a)Terá de ter setado o valor 'files' => true na abertura do form, q é equivalente a multipart-data.
+b)No arquivo config/filesystems, setar aonde o arquivo será salvo. Pode setar qual driver quer usar:
+
+'default' => env('FILESYSTEM_DRIVER', 'public'),
+
+disks' => [
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+Então ficará em storage/app/public
