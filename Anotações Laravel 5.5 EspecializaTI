@@ -313,7 +313,10 @@ return redirect()
 
 43)Para Upload de imagens:
 a)Terá de ter setado o valor 'files' => true na abertura do form, q é equivalente a multipart-data.
-b)No arquivo config/filesystems, setar aonde o arquivo será salvo. Pode setar qual driver quer usar:
+b)No Form o input deverá ser do tipo file:
+{!! Form::file('image', ['class' => 'form-control']) !!}
+
+c)No arquivo config/filesystems, setar aonde o arquivo será salvo. Pode setar qual driver quer usar:
 
 'default' => env('FILESYSTEM_DRIVER', 'public'),
 
@@ -327,3 +330,9 @@ disks' => [
         ],
 
 Então ficará em storage/app/public
+
+44)Para criar um link para public do projeto, dentro do wokspace de laradock\laravel55 execute o comando:
+php artisan storage:link
+
+Em seguida para ver o link storage:
+ls -la public/
