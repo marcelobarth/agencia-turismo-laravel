@@ -56,16 +56,25 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
+        $nameFile = null;
+
         //Verifica se existe o arquivo e se ele é um a arquivo válido, então se true, salva
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
-            $extension = $request->image->extension(); //Pegando a extensão do arquivo
-            $nameFile = uniqid(date('HisYmd')); //Definindo a hora como nome do arquivo
-            $newNameFile = "{$nameFile}.{$extension}"; //Juntando para criar o novo nome
+            // $extension = $request->image->extension(); //Pegando a extensão do arquivo
+            // $nameFile = uniqid(date('HisYmd')); //Definindo a hora como nome do arquivo
+            // $newNameFile = "{$nameFile}.{$extension}"; //Juntando para criar o novo nome
+            // $request->image->storeAs('flights', $newNameFile); //Cria a pasta flights, se não existir
 
-            $request->image->storeAs('flights', $newNameFile); //Cria a pasta flights, se não existir
+            $nameFile = uniqid(date('HisYmd')) . '.' . $request->image->extension(); // Essa opção se quiser juntar tudo
+
+            if (!$request->image->storeAs('flights', $nameFile))
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
         }
 
-        if ($this->flight->newFlight($request))
+        if ($this->flight->newFlight($request, $nameFile))
             return redirect()
                 ->route('flights.index')
                 ->with('success', 'Sucesso ao cadastrar');
@@ -74,6 +83,7 @@ class FlightController extends Controller
                 ->back()
                 ->with('error', 'Falha ao cadastrar')
                 ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
+
     }
 
     /**

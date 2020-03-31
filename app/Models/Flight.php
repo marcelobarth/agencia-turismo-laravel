@@ -31,7 +31,7 @@ class Flight extends Model
     }
 
 
-    public function newFlight($request)
+    public function newFlight($request, $nameFile = null)
     {
         /*
         $data = $request->all();
@@ -40,6 +40,8 @@ class Flight extends Model
         //dd($data);
         */
         $data = $request->all();
+        $data['image'] = $nameFile; //Passa para a posição image do array o arquivo de Upload, se existir
+
         return $this->create($data);
     }
 
@@ -51,6 +53,7 @@ class Flight extends Model
         $data['airport_destination_id']     = $request->destination;
         */
         $data = $request->all();
+
         return $this->update($data);
     }
 
