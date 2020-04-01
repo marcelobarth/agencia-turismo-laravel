@@ -336,3 +336,16 @@ php artisan storage:link
 
 Em seguida para ver o link storage:
 ls -la public/
+
+44)O método prepend() funciona como um placeholder, segundo parâmetro é um value:
+public function index()
+    {
+        $title = 'Voos disponíveis';
+
+        $flights = $this->flight->getItems();
+
+        $airports = Airport::pluck('id', 'name');
+        $airports->prepend('Escolha o aeroporto', '');
+
+        return view('panel.flights.index', compact('title', 'flights', 'airports'));
+    }

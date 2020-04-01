@@ -87,6 +87,12 @@ class Flight extends Model
 
             if ($request->total_stops)
                 $query->where('total_stops', $request->total_stops);
+
+            if ($request->origin)
+                $query->where('airport_origin_id', $request->origin);
+
+            if ($request->destination)
+                $query->where('airport_destination_id', $request->destination);
         })->paginate($totalPage);
         /** Para ver a SQL da consulta montada, use o método toSql() */
         // $flights = $this->where(function ($query) use ($request) {
@@ -101,6 +107,12 @@ class Flight extends Model
 
         //     if ($request->total_stops)
         //         $query->where('total_stops', $request->total_stops);
+
+        //     if ($request->origin)
+        //     $query->where('airport_origin_id', $request->origin);
+
+        // if ($request->destination)
+        //     $query->where('airport_destination_id', $request->destination);
         // })->toSql();
         // dd($flights);
         // return $flights;
