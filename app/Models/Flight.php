@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
+    /** Casts garante o tipo de value */
+    protected $casts = [
+        'is_promotion' => 'boolean',
+    ];
+
     protected $fillable = [
         'plane_id',
         'airport_origin_id',
