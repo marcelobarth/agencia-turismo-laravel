@@ -20,19 +20,19 @@
             <input type="text" name="nome" placeholder="Nome:" class="form-control">
             <input type="text" name="email" placeholder="E-mail:" class="form-control"> -->
         {!! Form::open(['route' => ['state.cities.search', $state->initials], 'class' => 'form form-inline']) !!}
-        {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite uma palavra chave']) !!}
+        <!-- {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite uma palavra chave']) !!} -->
         <button class="btn btn-search">Pesquisar</button>
         <!-- </form> -->
         {!! Form::close() !!}
 
-        @if(isset($dataForm['key_search']))
+        <!-- @if(isset($dataForm['key_search']))
         <div class="alert alert-info">
             <p>
                 <a href=""><i class="fa fa-refresh" aria-hidden="true"></i></a>
                 Resultados para: <strong>{{$dataForm['key_search']}}</strong>
             </p>
         </div>
-        @endif
+        @endif -->
     </div>
 
     <div class="messages">
@@ -49,7 +49,10 @@
         <tr>
             <td>{{$city->name}}</td>
             <td>
-                #ações
+                <a href="{{route('airports.index', $city->id)}}" class="edit">
+                    <i class="fa fa-thumb-tack" aria-hidden="true"></i>
+                    Aeroportos
+                </a>
             </td>
         </tr>
         @empty

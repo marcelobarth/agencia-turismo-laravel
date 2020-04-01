@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flight extends Model
 {
-    /** Casts garante o tipo de value */
+    /** Casts valida o tipo de value */
     protected $casts = [
         'is_promotion' => 'boolean',
     ];
