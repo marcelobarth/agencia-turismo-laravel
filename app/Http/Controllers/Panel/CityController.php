@@ -32,12 +32,12 @@ class CityController extends Controller
         if (!$state) {
             return redirect()->back();
         }
-
+        //Para preservar os dados da paginação
         $dataForm = $request->all();
 
         $keySearch = $request->key_search;
 
-        $cities = $state->searchCities($keySearch, $this->totalPage);
+        $cities = $state->searchCities($keySearch, $this->totalPage); //Esse método searchCities está implementado na model State
 
         $title = "Filtro: Cidades do Estado {$state->name}";
 

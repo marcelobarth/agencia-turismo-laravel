@@ -178,4 +178,16 @@ class FlightController extends Controller
             ->route('flights.index')
             ->with('success', 'Sucesso ao deletar');
     }
+
+    public function search(Request $request)
+    {
+        //Para preservar os dados da paginação
+        $dataForm = $request->except('_token');
+
+        $flights = $this->flight->search($request, $this->totalPage); //Esse método search está implementado na model
+
+        $title = "Resultados dos voos pesquisados";
+
+        return view('panel.flights.index', compact('title', 'flights', 'dataForm'));
+    }
 }

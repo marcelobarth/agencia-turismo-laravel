@@ -24,7 +24,7 @@ class CreateFlightsTable extends Migration
             $table->time('arrival_time');
             $table->double('old_price', 10, 2);
             $table->double('price', 10, 2);
-            $table->integer('total_plots');
+            $table->integer('total_stops');
             $table->boolean('is_promotion')->default(false);
             $table->string('image', 200)->nullable();
             $table->integer('qty_stops')->default(0);
@@ -33,17 +33,17 @@ class CreateFlightsTable extends Migration
 
 
             $table->foreign('plane_id')
-                    ->references('id')
-                    ->on('planes')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('planes')
+                ->onDelete('cascade');
             $table->foreign('airport_origin_id')
-                    ->references('id')
-                    ->on('airports')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('airports')
+                ->onDelete('cascade');
             $table->foreign('airport_destination_id')
-                    ->references('id')
-                    ->on('airports')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('airports')
+                ->onDelete('cascade');
         });
     }
 

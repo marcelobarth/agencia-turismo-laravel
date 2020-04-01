@@ -144,9 +144,10 @@ class BrandController extends Controller
 
     public function search(Request $request)
     {
+        //Para preservar os dados da paginação
         $dataForm = $request->except('_token');
 
-        $brands = $this->brand->search($request->key_search, $this->totalPage);
+        $brands = $this->brand->search($request->key_search, $this->totalPage); //Esse método search está implementado na model
 
         $title = "Brands, filtros para: {$request->key_search}";
 

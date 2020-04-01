@@ -30,7 +30,7 @@ class StateController extends Controller
 
         $title = "Resultados de estado: {$keySearch}";
 
-        $states = $this->state->search($keySearch);
+        $states = $this->state->search($keySearch); //Esse método searchCities está implementado na model
 
         return view('panel.states.index', compact('title', 'states'));
     }

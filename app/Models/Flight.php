@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon;
+// use Carbon\Carbon;
 
 class Flight extends Model
 {
@@ -29,7 +29,6 @@ class Flight extends Model
         return $this->with(['origin', 'destination'])
             ->paginate($this->totalPage);
     }
-
 
     public function newFlight($request, $nameFile = null)
     {
@@ -67,9 +66,43 @@ class Flight extends Model
     {
         return $this->belongsTo(Airport::class, 'airport_destination_id');
     }
+
     /** Mutator para data. Mas foi substituído com um helper */
     // public function getDateAttribute($value)
     // {
     //     return Carbon::parse($value)->format('d/m/Y');
     // }
+
+    public function search($request, $totalPage)
+    {
+        return $this->where(function ($query) use ($request) {
+            if ($request->code)
+                $query->where('id', $request->code);
+
+            if ($request->date)
+                $query->where('date', '>=', $request->date);
+
+            if ($request->hour_output)
+                $query->where('hour_output', $request->hour_output);
+
+            if ($request->total_stops)
+                $query->where('total_stops', $request->total_stops);
+        })->paginate($totalPage);
+        /** Para ver a SQL da consulta montada, use o método toSql() */
+        // $flights = $this->where(function ($query) use ($request) {
+        //     if ($request->code)
+        //         $query->where('id', $request->code);
+
+        //     if ($request->date)
+        //         $query->where('date', '>=', $request->date);
+
+        //     if ($request->hour_output)
+        //         $query->where('hour_output', $request->hour_output);
+
+        //     if ($request->total_stops)
+        //         $query->where('total_stops', $request->total_stops);
+        // })->toSql();
+        // dd($flights);
+        // return $flights;
+    }
 }
