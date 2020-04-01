@@ -136,7 +136,24 @@ class FlightController extends Controller
         if (!$flight)
             return redirect()->back();
 
-        if ($flight->updateFlight($request))
+        $nameFile = $flight->image;
+
+        //Verifica se existe o arquivo e se ele é um a arquivo válido, então se true, salva
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //Verifica se já existe uma imagem, senão cria uma imagem nova
+            if ($flight->image)
+                $nameFile = $flight->image;
+            else
+                $nameFile = uniqid(date('HisYmd')) . '.' . $request->image->extension(); // Essa opção se quiser juntar tudo
+
+            if (!$request->image->storeAs('flights', $nameFile))
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
+        }
+
+        if ($flight->updateFlight($request, $nameFile))
             return redirect()
                 ->route('flights.index')
                 ->with('success', 'Sucesso ao atualizar');

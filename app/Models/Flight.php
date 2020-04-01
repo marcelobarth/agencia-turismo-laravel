@@ -45,7 +45,7 @@ class Flight extends Model
         return $this->create($data);
     }
 
-    public function updateFlight($request)
+    public function updateFlight($request, $nameFile = '')
     {
         /*
         $data = $request->all();
@@ -53,6 +53,7 @@ class Flight extends Model
         $data['airport_destination_id']     = $request->destination;
         */
         $data = $request->all();
+        $data['image'] = $nameFile;
 
         return $this->update($data);
     }
