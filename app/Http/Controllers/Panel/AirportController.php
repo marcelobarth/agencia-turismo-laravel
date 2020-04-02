@@ -96,9 +96,20 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($idCity, $id)
     {
-        //
+        $airport = $this->airport->with('city')->find($id);
+
+        if (!$airport)
+            return redirect()->back();
+
+        $city = $airport->city;
+
+        $cities = $this->city->pluck('name', 'id');
+
+        $title = "Editar Aeroporto {$airport->name}";
+
+        return view('panel.airports.edit', compact('airport', 'title', 'city', 'cities'));
     }
 
     /**
@@ -108,9 +119,22 @@ class AirportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $idCity, $id)
     {
-        //
+        $airport = $this->airport->find($id);
+
+        if (!$airport)
+            return redirect()->back();
+
+        if ($airport->update($request->all()))
+            return redirect()
+                ->route('airports.index', $idCity)
+                ->with('success', 'Aeroporto atualizado com sucesso');
+
+        return redirect()
+            ->back()
+            ->with('error', 'Falha ao atualizar aeroporto')
+            ->withInput();
     }
 
     /**
