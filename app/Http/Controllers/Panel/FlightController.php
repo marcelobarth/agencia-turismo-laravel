@@ -31,7 +31,7 @@ class FlightController extends Controller
         // $flights = $this->flight->paginate($this->totalPage);
         $flights = $this->flight->getItems(); //Esse método foi criado na model, substituindo o anterior
 
-        $airports = Airport::pluck('id', 'name');
+        $airports = Airport::pluck('name', 'id');
         $airports->prepend('Escolha o aeroporto', ''); //prepend() funciona como um placeholder, segundo parâmetro é um value
 
         return view('panel.flights.index', compact('title', 'flights', 'airports'));
@@ -193,7 +193,7 @@ class FlightController extends Controller
 
         $title = "Resultados dos voos pesquisados";
 
-        // $airports = Airport::pluck('id', 'name');
+        // $airports = Airport::pluck('name', 'id');
 
         return view('panel.flights.index', compact('title', 'flights', 'dataForm', 'airports'));
     }

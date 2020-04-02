@@ -35,12 +35,12 @@
         @include('panel.includes.alerts')
     </div>
 
-    <!-- <div class="class-btn-insert">
+    <div class="class-btn-insert">
         <a href="{{route('airports.create', $city->id)}}" class="btn-insert">
             <span class="glyphicon glyphicon-plus"></span>
             Cadastrar
         </a>
-    </div> -->
+    </div>
 
     <table class="table table-striped">
         <tr>

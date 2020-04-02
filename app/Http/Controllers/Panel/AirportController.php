@@ -41,9 +41,18 @@ class AirportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($idCity)
     {
-        //
+        $city = $this->city->find($idCity);
+
+        if (!$city)
+            return redirect()->back();
+
+        $title = "Cadastrar novo aeroporto na cidade {$city->name}";
+
+        $cities = $this->city->pluck('name', 'id');
+
+        return view('panel.airports.create', compact('title', 'city', 'cities'));
     }
 
     /**

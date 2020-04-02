@@ -344,7 +344,7 @@ public function index()
 
         $flights = $this->flight->getItems();
 
-        $airports = Airport::pluck('id', 'name');
+        $airports = Airport::pluck('name','id');
         $airports->prepend('Escolha o aeroporto', '');
 
         return view('panel.flights.index', compact('title', 'flights', 'airports'));
