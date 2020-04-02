@@ -61,9 +61,22 @@ class AirportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $idCity)
     {
-        //
+        $city = $this->city->find($idCity);
+
+        if (!$city)
+            return redirect()->back();
+
+        if ($this->airport->create($request->all()))
+            return redirect()
+                ->route('airports.index', $request->city_id)
+                ->with('success', 'Aeroporto cadastrado com sucesso');
+
+        return redirect()
+            ->back()
+            ->with('error', 'Falha ao cadastrar aeroporto')
+            ->withInput();
     }
 
     /**
