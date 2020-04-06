@@ -15,7 +15,7 @@
 <div class="content-din bg-white">
 
     <div class="form-search">
-        {!! Form::open(['route' => ['brands.search', $city->id], 'class' => 'form form-inline']) !!}
+        {!! Form::open(['route' => ['airports.search', $city->id], 'class' => 'form form-inline']) !!}
         {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'O que deseja encontrar?']) !!}
 
         <button class="btn btn-search">Pesquisar</button>
