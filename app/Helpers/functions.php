@@ -11,3 +11,41 @@ function formatCoin($value)
 {
     return number_format($value, 2, ', ', ' . ');
 }
+
+/**
+ * Get all contraints on specific table
+ * @param $table Name table
+ * @param $column Add condition on query with column name
+ */
+// if (!function_exists('getContraintsInTable')) {
+//     function getContraintsInTable($table, $column)
+//     {
+//         $sql = "
+//             SELECT
+//                 dc.name as name
+//             FROM sys.tables t
+//             INNER JOIN sys.default_constraints dc ON t.object_id = dc.parent_object_id
+//             INNER JOIN sys.columns c ON dc.parent_object_id = c.object_id AND c.column_id = dc.parent_column_id
+//             WHERE
+//                 t.Name = '$table' AND c.name = '$column'
+//         ";
+
+//         return \DB::select($sql);
+//     }
+// }
+
+/**
+ * Drop constraints on specific table
+ * @param $table Name table
+ * @param $column Add condition on query with column name
+ */
+// if (!function_exists('dropConstraints')) {
+//     function dropConstraints($table, $column)
+//     {
+//         $constraints = getContraintsInTable($table, $column);
+
+//         foreach ($constraints as $constraint) {
+//             \DB::statement("IF EXISTS(select 1 from sys.objects where name = '$constraint->name') ALTER TABLE $table DROP CONSTRAINT $constraint->name");
+//         }
+//     }
+// }
