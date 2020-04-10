@@ -51,9 +51,7 @@ class UserController extends Controller
      */
     public function store(StoreUpdateUserFormRequest $request)
     {
-        $dataForm = $request->all();
-
-        if ($this->user->newUser($dataForm))
+        if ($this->user->newUser($request))
             return redirect()
                 ->route('users.index')
                 ->with('success', 'Usuário cadastrado com sucesso!');
