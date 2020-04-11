@@ -4,9 +4,18 @@ namespace App\Http\Controllers\Panel;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Reserve;
 
 class ReserveController extends Controller
 {
+
+    private $reserve;
+    private $totalPage = 50;
+
+    public function __construct(Reserve $reserve)
+    {
+        $this->reserve = $reserve;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,11 @@ class ReserveController extends Controller
      */
     public function index()
     {
-        //
+        $title = 'Reservas de passagnes aéreas';
+
+        $reserves = $this->reserve->with(['user', 'flight'])->paginate($this->totalPage);
+
+        return view('panel.reserves.index', compact('title', 'reserves'));
     }
 
     /**

@@ -349,3 +349,7 @@ public function index()
 
         return view('panel.flights.index', compact('title', 'flights', 'airports'));
     }
+
+45)Quando usar o método with() para trazer os relacionamentos de uma model e quisernos pegar outro relacionamento de uma destas models, podemos buscar assim:
+ $reserves = $this->reserve->with(['user', 'flight.origin.name'])->paginate($this->totalPage);
+Assim irá trazer o atributo nome do método de relacionamento origin() da model flight.
