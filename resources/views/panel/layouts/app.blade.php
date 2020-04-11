@@ -57,6 +57,13 @@
                 </li>
 
                 <li>
+                    <a href="{{route('flights.index')}}">
+                        <i class="fa fa-fighter-jet" aria-hidden="true"></i>
+                        Voos
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{route('users.index')}}">
                         <i class="fa fa-users" aria-hidden="true"></i>
                         Usuários
@@ -64,9 +71,9 @@
                 </li>
 
                 <li>
-                    <a href="{{route('flights.index')}}">
-                        <i class="fa fa-fighter-jet" aria-hidden="true"></i>
-                        Voos
+                    <a href="{{route('reserves.index')}}">
+                        <i class="fa fa-check-square" aria-hidden="true"></i>
+                        Reservas
                     </a>
                 </li>
             </ul>
