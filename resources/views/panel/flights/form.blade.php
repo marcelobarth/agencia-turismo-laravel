@@ -35,26 +35,25 @@
     {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Preço']) !!}
 </div>
 <div class="form-group">
-    <label for="price">Total de Parelas</label>
-    {!! Form::number('total_plots', null, ['class' => 'form-control', 'placeholder' => 'Total de Parelas']) !!}
+    <label for="total_stops">Total de Parcelas</label>
+    {!! Form::number('total_stops', null, ['class' => 'form-control', 'placeholder' => 'Total de Parcelas']) !!}
 </div>
 <div class="form-group">
     {!! Form::checkbox('is_promotion', true, null, ['id' => 'is_promotion']) !!}
-    <label for="price">É promoção?</label>
+    <label for="is_promotion">É promoção?</label>
 </div>
 <div class="form-group">
     <label for="image">Foto</label>
     {!! Form::file('image', ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    <label for="price">Quantidade de paradas</label>
+    <label for="qty_stops">Quantidade de paradas</label>
     {!! Form::number('qty_stops', null, ['class' => 'form-control', 'placeholder' => 'Quantidade de paradas']) !!}
 </div>
 <div class="form-group">
-    <label for="price">Descrição</label>
+    <label for="description">Descrição</label>
     {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Descrição do voo']) !!}
 </div>
-
 <div class="form-group">
     <button class="btn btn-search">Enviar</button>
 </div>

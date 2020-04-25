@@ -22,7 +22,7 @@ class Flight extends Model
         'arrival_time',
         'old_price',
         'price',
-        'total_plots',
+        'total_stops',
         'is_promotion',
         'image',
         'qty_stops',

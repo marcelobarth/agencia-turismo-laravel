@@ -7,8 +7,8 @@
     {!! Form::select('flight_id', $flights, null, ['class' => 'form-control']) !!}
 </div>
 <div class="form-group">
-    <label for="date">Data Reserva</label>
-    {!! Form::date('date', date('Y-m-d'), ['class' => 'form-control', 'placeholder' => 'Data Reserva']) !!}
+    <label for="date_reserved">Data Reserva</label>
+    {!! Form::date('date_reserved', date('Y-m-d'), ['class' => 'form-control', 'placeholder' => 'Data Reserva']) !!}
 </div>
 <div class="form-group">
     <label for="status">Status</label>

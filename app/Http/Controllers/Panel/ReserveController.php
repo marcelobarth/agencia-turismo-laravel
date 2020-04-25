@@ -58,7 +58,15 @@ class ReserveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if ($this->reserve->create($request->all()))
+            return redirect()
+                ->route('reserves.index')
+                ->with('message', 'Reservado com sucesso!');
+
+        return redirect()
+            ->back()
+            ->with('error', 'Falha ao reservar')
+            ->withInput(); //withInput() permite devolver os valores que foram preenchidos anteriormente no form em caso de erro.
     }
 
     /**

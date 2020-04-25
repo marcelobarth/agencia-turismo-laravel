@@ -58,7 +58,7 @@
             <td>{{$reserve->id}}</td>
             <td>{{$reserve->user->name}}</td>
             <td>{{$reserve->flight->id}}</td>
-            <td>{{$reserve->status}}</td>
+            <td>{{$reserve->status($reserve->status)}}</td>
             <td>
                 <a href="{{route('reserves.edit', $reserve->id)}}" class="edit">Edit</a>
             </td>
