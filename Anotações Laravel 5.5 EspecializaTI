@@ -353,3 +353,28 @@ public function index()
 45)Quando usar o método with() para trazer os relacionamentos de uma model e quisernos pegar outro relacionamento de uma destas models, podemos buscar assim:
  $reserves = $this->reserve->with(['user', 'flight.origin.name'])->paginate($this->totalPage);
 Assim irá trazer o atributo nome do método de relacionamento origin() da model flight.
+
+46)Para ver a SQL da consulta montada, use o método toSql() */
+$flights = $this->where(function ($query) use ($request) {
+    if ($request->code)
+        $query->where('id', $request->code);
+
+    if ($request->date)
+        $query->where('date', '>=', $request->date);
+
+    if ($request->hour_output)
+        $query->where('hour_output', $request->hour_output);
+
+    if ($request->total_stops)
+        $query->where('total_stops', $request->total_stops);
+
+    if ($request->origin)
+        $query->where('airport_origin_id', $request->origin);
+
+    if ($request->destination)
+        $query->where('airport_destination_id', $request->destination);
+})->toSql();
+
+    dd($flights);
+
+return $flights;

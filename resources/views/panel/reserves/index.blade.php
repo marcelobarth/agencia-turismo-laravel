@@ -38,7 +38,7 @@
     </div>
 
     <div class="class-btn-insert">
-        <a href="{{route('planes.create')}}" class="btn-insert">
+        <a href="{{route('reserves.create')}}" class="btn-insert">
             <span class="glyphicon glyphicon-plus"></span>
             Fazer Nova Reserva
         </a>
