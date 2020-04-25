@@ -378,3 +378,12 @@ $flights = $this->where(function ($query) use ($request) {
     dd($flights);
 
 return $flights;
+
+47) O primeiro parâmetro, que é um objeto $reserve, dentro do array Form::model, mantém os capos preenchidos em caso de erro no edit.
+
+    {!! Form::model($reserve, ['route' => ['reserves.update', $reserve->id], 'class' => 'form form-search form-ds', 'method' => 'PUT']) !!}
+    <div class="form-group">
+        <label for="status">Status</label>
+        {!! Form::select('status', $status, null, ['class' => 'form-control']) !!}
+    </div>
+    {!! Form::close() !!}
