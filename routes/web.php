@@ -35,6 +35,7 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
     Route::any('users/search', 'UserController@search')->name('users.search');
     Route::resource('users', 'UserController');
 
+    Route::any('reserves/search', 'ReserveController@search')->name('reserves.search');
     Route::resource('reserves', 'ReserveController', ['except' => ['show', 'destroy']]);
 
     Route::get('/', 'PanelController@index')->name('panel');

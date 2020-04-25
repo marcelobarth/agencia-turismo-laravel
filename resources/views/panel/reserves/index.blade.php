@@ -17,8 +17,10 @@
         <!-- <form class="form form-inline">
             <input type="text" name="nome" placeholder="Nome:" class="form-control">
             <input type="text" name="email" placeholder="E-mail:" class="form-control"> -->
-        {!! Form::open(['route' => 'planes.search', 'class' => 'form form-inline']) !!}
-        {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Digite uma palavra chave']) !!}
+        {!! Form::open(['route' => 'reserves.search', 'class' => 'form form-inline']) !!}
+        {!! Form::text('user', null, ['class' => 'form-control', 'placeholder' => 'Detalhes do usuário']) !!}
+        {!! Form::text('reserve', null, ['class' => 'form-control', 'placeholder' => 'Detalhes da reserva']) !!}
+        {!! Form::date('date', null, ['class' => 'form-control', 'placeholder' => 'Data do voo']) !!}
         <button class="btn btn-search">Pesquisar</button>
         <!-- </form> -->
         {!! Form::close() !!}
@@ -56,8 +58,8 @@
         @forelse($reserves as $reserve)
         <tr>
             <td>{{$reserve->id}}</td>
-            <td>{{$reserve->user->name}}</td>
-            <td>{{$reserve->flight->id}} ( {{formatDateAndTime($reserve->flight->date)}} )</td>
+            <td>{{$reserve->user_name}}</td>
+            <td>{{$reserve->flight_id}} ( {{formatDateAndTime($reserve->flight_date)}} )</td>
             <td>{{$reserve->status($reserve->status)}}</td>
             <td>
                 <a href="{{route('reserves.edit', $reserve->id)}}" class="edit">Edit</a>
