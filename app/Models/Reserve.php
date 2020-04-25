@@ -19,7 +19,7 @@ class Reserve extends Model
         return $this->belongsTo(Flight::class);
     }
 
-    public function status($op = null)
+    public function status($option = null)
     {
         $statusAvailable = [
             'reserved' => 'Reservado',
@@ -28,9 +28,16 @@ class Reserve extends Model
             'concluded' => 'Concluído',
         ];
 
-        if ($op)
-            return $statusAvailable['reserved'];
+        if ($option)
+            return $statusAvailable[$option];
 
         return $statusAvailable;
+    }
+
+    public function changeStatus($newStatus)
+    {
+        $this->status = $newStatus;
+
+        return $this->save();
     }
 }
