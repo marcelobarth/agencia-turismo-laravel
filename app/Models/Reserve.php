@@ -69,6 +69,7 @@ class Reserve extends Model
             })
             ->where('reserves.status', $request->status)
             ->paginate($totalPage);
+
         return $reserves;
     }
 }
