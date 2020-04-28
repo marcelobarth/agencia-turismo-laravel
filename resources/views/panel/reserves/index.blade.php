@@ -13,7 +13,7 @@
 
 <div class="content-din bg-white">
 
-    @include('panel.reserves.form-search');
+    @include('panel.reserves.form-search')
 
     <div class="messages">
         @include('panel.includes.alerts')
