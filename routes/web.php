@@ -43,6 +43,8 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
 
+Route::post('pesquisar', 'Site\SiteController@search@search')->name('search.flights.site');
+
 Route::get('/', 'Site\SiteController@index');
 
 Auth::routes();
