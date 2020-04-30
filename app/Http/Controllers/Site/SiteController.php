@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\City;
-use App\Models\Flight;
-use App\Models\Airport;
 
 class SiteController extends Controller
 {
@@ -15,9 +13,9 @@ class SiteController extends Controller
 
         $title = 'Home Page';
 
-        $airports = Airport::with('city')->get();
+        $cities = City::get();
 
-        return view('site.home.index', compact('title', 'airports'));
+        return view('site.home.index', compact('title', 'cities'));
     }
 
     public function promotions()
@@ -26,18 +24,5 @@ class SiteController extends Controller
         $title = 'Promoções';
 
         return view('site.promotions.list', compact('title'));
-    }
-
-    public function search(Request $request, Flight $flight)
-    {
-
-        $title = 'Resultados da Pesquisa';
-
-        $origin = getInfoAirport($request->origin);
-        $destination = getInfoAirport($request->destination);
-
-        $flights = $flight->search($origin['id_city'], $destination['id_city'], $request->date);
-
-        return view('site.results.search', compact('title', 'flights'));
     }
 }
