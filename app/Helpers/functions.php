@@ -16,16 +16,16 @@ function getInfoAirport($city)
 {
     //Explode a - as cidades que estão na variável
     $dataCity = explode(' - ', $city);
-    $idAirport = $dataCity[0];
+    $idCity = $dataCity[0];
 
     $dataCity = explode(' / ', $dataCity[1];);
     $cityName = $dataCity[0];
     $airportName = $dataCity[1];
 
     return [
-        'id_airport' => $idAirport,
-        'name_airport' => $airportName,
+        'id_city' => $idCity,
         'name_city' => $cityName,
+        'name_airport' => $airportName,
     ];
 }
 
