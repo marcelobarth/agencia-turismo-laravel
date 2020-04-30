@@ -12,6 +12,23 @@ function formatCoin($value)
     return number_format($value, 2, ', ', ' . ');
 }
 
+function getInfoAirport($city)
+{
+    //Explode a - as cidades que estão na variável
+    $dataCity = explode(' - ', $city);
+    $idCity = $dataCity[0];
+
+    $dataCity = explode(' / ', $dataCity[1];);
+    $cityName = $dataCity[0];
+    $airportName = $dataCity[1];
+
+    return [
+        'id_city' => $idCity,
+        'name_city' => $cityName,
+        'name_airport' => $airportName,
+    ];
+}
+
 /**
  * Get all contraints on specific table
  * @param $table Name table

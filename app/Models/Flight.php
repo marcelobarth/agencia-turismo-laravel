@@ -132,4 +132,12 @@ class Flight extends Model
         // dd($flights);
         // return $flights;
     }
+
+    public function searchFlights($origin, $destination, $date)
+    {
+        return $this->where('flights.origin', $origin)
+            ->where('flights.origin', $destination)
+            ->where('flights.date', $date)
+            ->get();
+    }
 }
