@@ -109,6 +109,7 @@ class Flight extends Model
             if ($request->destination)
                 $query->where('airport_destination_id', $request->destination);
         })->paginate($totalPage);
+
         /** Para ver a SQL da consulta montada, use o método toSql() */
         // $flights = $this->where(function ($query) use ($request) {
         //     if ($request->code)
