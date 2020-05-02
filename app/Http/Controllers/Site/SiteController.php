@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Site;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreReserveFormRequest;
 use App\Models\City;
 use App\Models\Flight;
 use App\Models\Airport;
+use App\Models\Reserve;
 
 class SiteController extends Controller
 {
@@ -59,5 +61,22 @@ class SiteController extends Controller
         $title = "Detalhes do voo {$flight->id}";
 
         return view('site.flight.details', compact('flight', 'title'));
+    }
+
+    public function reserveFlight(StoreReserveFormRequest $request, Reserve $reserve)
+    {
+        if ($reserve->newReserve($request->flight_id))
+            return redirect()
+                ->route('purchaces')
+                ->with('success', 'Reserva realizada com sucesso!');
+
+        return redirect()
+            ->back()
+            ->with('error', 'Falha ao reservar!');
+    }
+
+    public function myPurchaces()
+    {
+        return 'myPurchaces';
     }
 }

@@ -49,6 +49,17 @@
             </li>
         </ul>
 
+
+        @include('panel.includes.errors')
+
+        {!! Form::open(['route' => 'reserve.flight']) !!}
+        {!! Form::hidden('user_id', auth()->user->id) !!}
+        {!! Form::hidden('flight_id', $flight->id) !!}
+        {!! Form::hidden('date_reserved', date('Y-m-d')) !!}
+        {!! Form::hidden('status', 'reserved') !!}
+        <button type="submit" class="btn btn-success">Reservar Agora</button>
+        {!! Form::close() !!}
+
     </section>
     <!--Container-->
 
