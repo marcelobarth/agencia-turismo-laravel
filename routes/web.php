@@ -44,6 +44,7 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('detalhes-compra/{idReserve}', 'Site\SiteController@purchaseDetail')->name('purchase.detail');
     Route::get('minhas-compras', 'Site\SiteController@myPurchases')->name('my.purchases');
 
     Route::get('detalhes-voo/{id}', 'Site\SiteController@detailsFlight')->name('details.flight');
