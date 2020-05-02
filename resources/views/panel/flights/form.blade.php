@@ -35,8 +35,8 @@
     {!! Form::text('price', null, ['class' => 'form-control', 'placeholder' => 'Preço']) !!}
 </div>
 <div class="form-group">
-    <label for="total_stops">Total de Parcelas</label>
-    {!! Form::number('total_stops', null, ['class' => 'form-control', 'placeholder' => 'Total de Parcelas']) !!}
+    <label for="total_plots">Total de Parcelas</label>
+    {!! Form::number('total_plots', null, ['class' => 'form-control', 'placeholder' => 'Total de Parcelas']) !!}
 </div>
 <div class="form-group">
     {!! Form::checkbox('is_promotion', true, null, ['id' => 'is_promotion']) !!}

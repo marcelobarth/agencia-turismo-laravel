@@ -24,7 +24,7 @@ class CreateFlightsTable extends Migration
             $table->time('arrival_time');
             $table->double('old_price', 10, 2);
             $table->double('price', 10, 2);
-            $table->integer('total_stops');
+            $table->integer('total_plots');
             $table->boolean('is_promotion')->default(false);
             $table->string('image', 200)->nullable();
             $table->integer('qty_stops')->default(0);

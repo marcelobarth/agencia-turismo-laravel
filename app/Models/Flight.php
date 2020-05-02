@@ -22,7 +22,7 @@ class Flight extends Model
         'arrival_time',
         'old_price',
         'price',
-        'total_stops',
+        'total_plots',
         'is_promotion',
         'image',
         'qty_stops',
@@ -100,8 +100,8 @@ class Flight extends Model
             if ($request->hour_output)
                 $query->where('hour_output', $request->hour_output);
 
-            if ($request->total_stops)
-                $query->where('total_stops', $request->total_stops);
+            if ($request->total_plots)
+                $query->where('total_plots', $request->total_plots);
 
             if ($request->origin)
                 $query->where('airport_origin_id', $request->origin);
@@ -120,8 +120,8 @@ class Flight extends Model
         //     if ($request->hour_output)
         //         $query->where('hour_output', $request->hour_output);
 
-        //     if ($request->total_stops)
-        //         $query->where('total_stops', $request->total_stops);
+        //     if ($request->total_plots)
+        //         $query->where('total_plots', $request->total_plots);
 
         //     if ($request->origin)
         //     $query->where('airport_origin_id', $request->origin);
@@ -138,6 +138,14 @@ class Flight extends Model
         return  $this->where('flights.airport_origin_id', $origin)
             ->where('flights.airport_destination_id', $destination)
             ->where('flights.date', $date)
+            ->get();
+    }
+
+    public function promotions()
+    {
+        return  $this->where('is_promotion', true)
+            ->where('date', '>=', date('Y-m-d'))
+            ->with(['origin.city', 'destination.city'])
             ->get();
     }
 }

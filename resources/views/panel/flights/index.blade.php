@@ -18,7 +18,7 @@
         {!! Form::number('code', null, ['class' => 'form-control', 'placeholder' => 'Código']) !!}
         {!! Form::date('date', null, ['class' => 'form-control']) !!}
         {!! Form::time('hour_output', null, ['class' => 'form-control']) !!}
-        {!! Form::number('total_stops', null, ['class' => 'form-control', 'placeholder' => 'Total de Paradas']) !!}
+        {!! Form::number('total_plots', null, ['class' => 'form-control', 'placeholder' => 'Total de Paradas']) !!}
 
         {!! Form::select('origin', $airports, null, ['class' => 'form-control']) !!}
         {!! Form::select('destination', $airports, null, ['class' => 'form-control']) !!}
@@ -43,8 +43,8 @@
                 <p>Hora da Saída: <strong>{{$dataForm['hour_output']}}</strong></p>
                 @endif
 
-                @if (isset($dataForm['total_stops']))
-                <p>Total de Paradas: <strong>{{$dataForm['total_stops']}}</strong></p>
+                @if (isset($dataForm['total_plots']))
+                <p>Total de Paradas: <strong>{{$dataForm['total_plots']}}</strong></p>
                 @endif
 
             </p>
