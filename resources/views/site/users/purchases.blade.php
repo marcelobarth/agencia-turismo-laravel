@@ -22,7 +22,7 @@
                 <tr>
                     <td>{{ $purchase->id }}</td>
                     <td>
-                        <a href="{{ route('purchase.detail', $purchase->flight_id) }}" class="badge badge-light">
+                        <a href="{{ route('purchase.detail', $purchase->id) }}" class="badge badge-light">
                             Ver Detalhes Voô:{{ $purchase->flight_id }}
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                         </a>
