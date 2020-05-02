@@ -41,12 +41,23 @@ class SiteController extends Controller
             $request->date
         );
 
-        return view('site.search.index', [
+        return view('site.search.search', [
             'title'         => $title,
             'flights'       => $flights,
             'origin'        => $origin['name_city'],
             'destination'  => $destination['name_city'],
             'date'          => formatDateAndTime($request->date)
         ]);
+    }
+
+    public function detailsFlight($idFlight)
+    {
+        $flight = Flight::with(['origin', 'destination'])->find($idFlight);
+        if (!$flight)
+            return redirect()->back();
+
+        $title = "Detalhes do voo {$flight->id}";
+
+        return view('site.flight.details', compact('flight', 'title'));
     }
 }
