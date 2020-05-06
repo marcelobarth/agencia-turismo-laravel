@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Http\Requests\StoreUpdateUserFormRequest;
+use App\Http\Requests\UpdateProfileUserFormRequest;
 
 class UserController extends Controller
 {
@@ -159,7 +160,7 @@ class UserController extends Controller
         return view('site.users.profile', compact('title'));
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(UpdateProfileUserFormRequest $request)
     {
         $user = auth()->user();
         $user->name = $request->name;
@@ -173,7 +174,7 @@ class UserController extends Controller
             if ($user->image)
                 $nameFile = $user->image;
             else
-                $nameFile = $user->name . '.' . $request->image->extension();
+                $nameFile = kebab_case($user->name) . '.' . $request->image->extension();
             //Passando o nome do arquivo para o objeto
             $user->image = $nameFile;
 

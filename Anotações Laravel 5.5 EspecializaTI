@@ -438,3 +438,6 @@ $request->image->extension()
 
 54)storeAs() faz o upload para storage e cria a pasta users para salvar, caso não exista
 $request->image->storeAs('users', $nameFile)
+
+55)kebab_case() converte tudo em minusculo e separa com _
+$nameFile = kebab_case($user->name) . '.' . $request->image->extension();
