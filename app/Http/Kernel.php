@@ -57,5 +57,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //Adicionado para o Middleware de verificação de is_admin. Dei o nome de 'admin'. Agora é só adicona-lo ao grupo de rotas que deseja.
+        'admin' => \App\Http\Middleware\ChekIsAdmin::class,
     ];
 }
