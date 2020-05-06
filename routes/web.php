@@ -45,7 +45,7 @@ Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('meu-perfil', 'Panel\UserController@myProfile')->name('my.profile');
-    Route::get('atualizar-perfil', 'Panel\UserController@updateProfile')->name('update.profile');
+    Route::post('atualizar-perfil', 'Panel\UserController@updateProfile')->name('update.profile');
 
     Route::get('detalhes-compra/{idReserve}', 'Site\SiteController@purchaseDetail')->name('purchase.detail');
     Route::get('minhas-compras', 'Site\SiteController@myPurchases')->name('my.purchases');
