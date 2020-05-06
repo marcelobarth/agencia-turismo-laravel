@@ -424,5 +424,17 @@ public function search($request, $totalPage = 3)
 49) Criar uma validação personalizada, ou uma Request personalizada, dentro do wokspace de laradock\laravel55 execute o comando:
 php artisan make:rule CheckAvailableFlight
 
-50)Cheka se o usuário está logado
+50)check() cheka se o usuário está logado
 auth()->check()
+
+51)hasFile() verifica se existe um arquivo
+$request->hasFile('image') 
+
+52)isValid() verifica se é um arquivo válido
+$request->file('image')->isValid()
+
+53)extension() retorna a extensão original do arquivo
+$request->image->extension()
+
+54)storeAs() faz o upload para storage e cria a pasta users para salvar, caso não exista
+$request->image->storeAs('users', $nameFile)

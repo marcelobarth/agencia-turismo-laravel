@@ -167,6 +167,22 @@ class UserController extends Controller
         if ($request->password) {
             $user->password = bcrypt($request->password);
         }
+        //Verificando se existe um arquivo e se é válido
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            //Pegando o nome do arquivo com o nome da imagem e concatenando com a extensão do arquivo
+            if ($user->image)
+                $nameFile = $user->image;
+            else
+                $nameFile = $user->name . '.' . $request->image->extension();
+            //Passando o nome do arquivo para o objeto
+            $user->image = $nameFile;
+
+            //storeAs() cria a pasta users  para salvar, caso não exista
+            if (!$request->image->storeAs('users', $nameFile))
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload!');
+        }
 
         if ($user->save())
             return redirect()
