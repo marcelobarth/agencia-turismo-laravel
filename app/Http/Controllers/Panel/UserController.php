@@ -194,4 +194,11 @@ class UserController extends Controller
                 ->back()
                 ->with('error', 'Falha ao alterar os dados!');
     }
+
+    public function logout()
+    {
+        \Auth::logout();
+
+        return redirect()->route('home');
+    }
 }
