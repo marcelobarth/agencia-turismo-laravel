@@ -151,4 +151,18 @@ class UserController extends Controller
 
         return view('panel.users.index', compact('title', 'users', 'dataForm'));
     }
+
+    public function myProfile()
+    {
+        $title = 'Meu Perfil';
+
+        return view('site.users.profile', compact('title'));
+    }
+
+    public function updateProfile()
+    {
+        // $title = 'Meu Perfil';
+
+        return 'Atualizando Dados';
+    }
 }
