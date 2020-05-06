@@ -44,6 +44,8 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel'], function () {
 Route::get('promocoes', 'Site\SiteController@promotions')->name('promotions');
 
 Route::group(['middleware' => 'auth'], function () {
+    Route::get('meu-perfil', 'Site\SiteController@myProfile')->name('my.profile');
+
     Route::get('detalhes-compra/{idReserve}', 'Site\SiteController@purchaseDetail')->name('purchase.detail');
     Route::get('minhas-compras', 'Site\SiteController@myPurchases')->name('my.purchases');
 
@@ -54,6 +56,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::post('pesquisar', 'Site\SiteController@search')->name('search.flights.site');
 
-Route::get('/', 'Site\SiteController@index');
+Route::get('/', 'Site\SiteController@index')->name('home');
 
 Auth::routes();

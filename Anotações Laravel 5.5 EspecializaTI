@@ -423,3 +423,6 @@ public function search($request, $totalPage = 3)
 
 49) Criar uma validação personalizada, ou uma Request personalizada, dentro do wokspace de laradock\laravel55 execute o comando:
 php artisan make:rule CheckAvailableFlight
+
+50)Cheka se o usuário está logado
+auth()->check()
