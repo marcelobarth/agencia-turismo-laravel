@@ -502,3 +502,10 @@ Route::group(['prefix' => 'panel', 'namespace' => 'Panel', 'middleware' => ['aut
 
 35)Para fazer o logout, use a Facade logout:
 \Auth::logout();
+
+36)Traduzir a aplicação para qualquer língua:
+a) Vá até https://github.com/caouecs/Laravel-lang e baixe o pacote, ou clone para qualquer diretório.
+
+b)Entre no diretório Laravel-lang, copie a pasta pt-BR e cole em \resources\lang
+
+c)Em seguida vá em \config\app.php, mude os atributos para 'locale' => 'pt-BR', e 'fallback_locale' => 'pt-BR', pt-BR é o nome da pasta escolhida em Laravel-lang.
